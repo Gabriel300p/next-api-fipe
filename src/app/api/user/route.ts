@@ -2,18 +2,13 @@ import { db } from "@/lib/db";
 import { z } from "zod";
 
 export async function POST(req: Request) {
-  const bodySchema = z.object({
-    name: z.string(),
-    email: z.string(),
-  });
-
-  const { name, email } = bodySchema.parse(req.body);
+  const body = await req.json();
 
   try {
     const user = await db.user.create({
       data: {
-        name,
-        email,
+        name: body.name,
+        email: body.email,
       },
     });
     return new Response(JSON.stringify(user), { status: 200 });
