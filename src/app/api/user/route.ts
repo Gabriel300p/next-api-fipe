@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { z } from "zod";
 
-export async function GET(req: Request) {
+export async function POST(req: Request) {
   const bodySchema = z.object({
     name: z.string(),
     email: z.string(),
