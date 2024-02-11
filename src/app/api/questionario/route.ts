@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   try {
     const requestData = await req.json();
 
-    await db.questionario.create({
+    const questionario = await db.questionario.create({
       data: {
         latitude: requestData.latitude,
         longitude: requestData.longitude,
@@ -22,12 +22,10 @@ export async function POST(req: Request) {
         },
       },
     });
+
+    console.log(questionario);
     return new Response("Questionário criado", { status: 200 });
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return new Response(error.message, { status: 422 });
-    }
-
     return new Response(
       `Não foi possível criar o questionário ${
         error instanceof z.ZodError ? error.issues : error
@@ -56,7 +54,7 @@ export async function GET() {
             resposta: true,
             observacao: true,
             imagem: true,
-            pergunta: {
+            Pergunta: {
               select: {
                 concessionaria: true,
                 tipodeObra: true,

@@ -29,7 +29,7 @@ model Pergunta {
 }
 
 model Questionario {
-  id               Int                @id @default(autoincrement())
+  id               String             @id @default(uuid())
   latitude         String
   longitude        String
   dataHora         DateTime           @default(now())
@@ -39,12 +39,13 @@ model Questionario {
 }
 
 model ItemQuestionario {
-  id             Int          @id @default(autoincrement())
+  id             String  @id @default(uuid())
   resposta       String
   imagem         String
   observacao     String?
-  questionarioId Int
+  questionarioId String
   perguntaId     String
-  questionario   Questionario @relation(fields: [questionarioId], references: [id])
-  pergunta       Pergunta     @relation(fields: [perguntaId], references: [id])
+
+  Pergunta     Pergunta     @relation(fields: [perguntaId], references: [id])
+  Questionario Questionario @relation(fields: [questionarioId], references: [id])
 }
