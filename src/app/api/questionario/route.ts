@@ -28,9 +28,14 @@ export async function POST(req: Request) {
       return new Response(error.message, { status: 422 });
     }
 
-    return new Response("Não foi possível criar o questionário", {
-      status: 500,
-    });
+    return new Response(
+      `Não foi possível criar o questionário ${
+        error instanceof z.ZodError ? error.issues : error
+      }`,
+      {
+        status: 500,
+      }
+    );
   }
 }
 
