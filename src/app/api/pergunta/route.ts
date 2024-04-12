@@ -18,7 +18,6 @@ export async function POST(req: NextRequest) {
       select: {
         id: true,
         pergunta: true,
-        obra: true,
       },
       orderBy: {
         id: "asc",
