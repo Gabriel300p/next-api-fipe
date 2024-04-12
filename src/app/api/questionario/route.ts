@@ -9,6 +9,10 @@ export async function POST(req: Request) {
       data: {
         latitude: requestData.latitude,
         longitude: requestData.longitude,
+        local: requestData.local,
+        obra: requestData.obra,
+        opcao: requestData.opcao,
+        titulo: requestData.titulo,
         userId: requestData.userId,
         ItemQuestionario: {
           createMany: {
@@ -43,6 +47,10 @@ export async function GET() {
       select: {
         latitude: true,
         longitude: true,
+        local: true,
+        obra: true,
+        opcao: true,
+        titulo: true,
         dataHora: true,
         user: {
           select: {
@@ -56,12 +64,8 @@ export async function GET() {
             imagem: true,
             Pergunta: {
               select: {
-                concessionaria: true,
-                tipodeObra: true,
-                local: true,
-                elementoFisico: true,
+                obra: true,
                 pergunta: true,
-                unidadeMedida: true,
               },
             },
           },

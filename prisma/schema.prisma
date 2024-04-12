@@ -18,12 +18,8 @@ model User {
 }
 
 model Pergunta {
-  id               String             @id
-  concessionaria   String
-  tipodeObra       String
-  local            String
-  elementoFisico   String
-  unidadeMedida    String
+  id               String             @id @default(uuid())
+  obra             String
   pergunta         String
   ItemQuestionario ItemQuestionario[]
 }
@@ -33,19 +29,22 @@ model Questionario {
   latitude         String
   longitude        String
   dataHora         DateTime           @default(now())
+  titulo           String
+  opcao            String
+  local            String
+  obra             String
   userId           String
   user             User               @relation(fields: [userId], references: [id])
   ItemQuestionario ItemQuestionario[]
 }
 
 model ItemQuestionario {
-  id             String  @id @default(uuid())
-  resposta       String
-  imagem         String
+  id             String       @id @default(uuid())
+  resposta       String?
+  imagem         String?
   observacao     String?
   questionarioId String
   perguntaId     String
-
-  Pergunta     Pergunta     @relation(fields: [perguntaId], references: [id])
-  Questionario Questionario @relation(fields: [questionarioId], references: [id])
+  Pergunta       Pergunta     @relation(fields: [perguntaId], references: [id])
+  Questionario   Questionario @relation(fields: [questionarioId], references: [id])
 }
