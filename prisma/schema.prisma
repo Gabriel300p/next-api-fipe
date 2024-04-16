@@ -17,6 +17,14 @@ model User {
   Questionario Questionario[]
 }
 
+model Profile {
+  id           String         @id @default(uuid())
+  name         String
+  email        String         @unique
+  password     String
+  Questionario Questionario[]
+}
+
 model Pergunta {
   id               String             @id @default(uuid())
   obra             String
@@ -36,6 +44,8 @@ model Questionario {
   userId           String
   user             User               @relation(fields: [userId], references: [id])
   ItemQuestionario ItemQuestionario[]
+  Profile          Profile?           @relation(fields: [profileId], references: [id])
+  profileId        String?
 }
 
 model ItemQuestionario {
