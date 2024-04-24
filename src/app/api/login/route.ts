@@ -13,6 +13,7 @@ export async function POST(req: Request) {
     });
 
     const username = user?.name;
+    const id = user?.id;
 
     if (!user) {
       return new Response(JSON.stringify({ error: "User not found" }), {
@@ -28,7 +29,9 @@ export async function POST(req: Request) {
 
     const token = await bcrypt.hash(email, 10);
 
-    return new Response(JSON.stringify({ token, username }), { status: 200 });
+    return new Response(JSON.stringify({ token, username, id }), {
+      status: 200,
+    });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(error.message, { status: 422 });

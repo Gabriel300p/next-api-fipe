@@ -17,7 +17,7 @@ export async function POST(req: Request) {
         opcao: true,
         titulo: true,
         dataHora: true,
-        user: {
+        Profile: {
           select: {
             name: true,
           },

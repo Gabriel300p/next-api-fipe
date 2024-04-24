@@ -11,10 +11,9 @@ datasource db {
 }
 
 model User {
-  id           String         @id @default(uuid())
-  name         String
-  email        String
-  Questionario Questionario[]
+  id    String @id @default(uuid())
+  name  String
+  email String
 }
 
 model Profile {
@@ -41,8 +40,6 @@ model Questionario {
   opcao            String
   local            String
   obra             String
-  userId           String
-  user             User               @relation(fields: [userId], references: [id])
   ItemQuestionario ItemQuestionario[]
   Profile          Profile?           @relation(fields: [profileId], references: [id])
   profileId        String?

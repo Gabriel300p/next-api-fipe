@@ -13,7 +13,7 @@ export async function POST(req: Request) {
         obra: requestData.obra,
         opcao: requestData.opcao,
         titulo: requestData.titulo,
-        userId: requestData.userId,
+        profileId: requestData.profileId,
         ItemQuestionario: {
           createMany: {
             data: requestData.ItemQuestionario.map((item: any) => ({
